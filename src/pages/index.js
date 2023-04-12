@@ -3,6 +3,7 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 const Home = () => {
   const { user } = useUser();
   
+  // Logged In
   if (user) {
     return (
       <>
@@ -11,6 +12,8 @@ const Home = () => {
       </>
     )
   }
+  
+  // Logged out
   return (
     <>
     <main>
