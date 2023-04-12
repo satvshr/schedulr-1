@@ -65,11 +65,5 @@ main {
   color: white;
   grid-column-start: 4;
   grid-row-start: 6;
+  border: none;
 }
-
-/*
-.home-calendar{
-  position: fixed;
-  right: 87%;
-  top:60%;
-} */
