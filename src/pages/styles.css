@@ -1,6 +1,6 @@
-body {
-  background-image: url(../../public/Background.png);
-}
+/* body { */
+  /* background-image: url(../../public/background.png); */
+/* } */
 
 main {
   display: grid;
@@ -41,7 +41,7 @@ main {
   font-family: "Poppins", Helvetica;
   font-size: 80px;
   font-weight: 1;
-  width: 700px;
+  width: 650px;
   grid-column-start: 4;
   grid-row-start: 3;
 }
@@ -53,7 +53,7 @@ main {
   font-weight: 400;
   grid-column-start: 4;
   grid-row-start: 5;
-  width: 700px;
+  width: 650px;
 }
 
 .home-button {
@@ -67,3 +67,7 @@ main {
   grid-row-start: 6;
   border: none;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
