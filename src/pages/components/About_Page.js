@@ -8,12 +8,12 @@ function About_Page() {
     <div className={"home-schedulr"}>SCHEDULR</div>
     <div className={"home-about-us"}>ABOUT US</div>
 
-    <h1 className={"home-content-h1"}>You won't believe how useless this app is.</h1>
-    <p className={"home-content-p"}>
+    <h1 className={"home-content-h1 leading-none"}>You won't believe how useless this app is.</h1>
+    <p className={"home-content-p leading-snug"}>
       That’s right, we put the u in useless by holding you at gunpoint to use this app. It’s either death or schedulr. You
       choose.
     </p>
-    <button className={"home-button"} type="button" onClick={event => window.location.href = '/api/auth/login'}> GET STARTED </button>
+    <button className={"home-button bg-blue-500"} type="button" onClick={event => window.location.href = '/api/auth/login'}> GET STARTED </button>
 
   </main>
   )

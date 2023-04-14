@@ -3,21 +3,34 @@ import GlobalContext from '../context/GlobalContext'
 import Image from 'next/image'
 import Icon from './icons/plus.png'
 
-function CreateEventButton() {
-  
-  const {setShowEventModal} = useContext(GlobalContext)
-  
-  return (
-    
-    <button onClick={() => setShowEventModal(true)} className='border p-2 rounded-full flex items-center shadow-md hover:shadow-2xl'>
-    
+function CreateEventButton(disabledBool) {
+
+  const { setShowEventModal } = useContext(GlobalContext)
+  console.log("disabled.disabled", disabledBool)
+  if (!disabledBool) {
+    return (
+
+      <button onClick={() => setShowEventModal(true)} className='border p-2 rounded-full flex items-center shadow-md hover:shadow-2xl'>
+
         <Image src={Icon} alt="create_event" width={25} height={25} />
         <span className='pl-3 pr-3'>
-            Create
+          Create
         </span>
-    
-    </button>
-  )
+
+      </button>
+    )
+  } else {
+    return (
+      <button disabled onClick={() => setShowEventModal(true)} className='border p-2 rounded-full flex items-center shadow-md hover:shadow-2xl'>
+
+        <Image src={Icon} alt="create_event" width={25} height={25} />
+        <span className='pl-3 pr-3'>
+          Create
+        </span>
+
+      </button>
+    )
+  }
 }
 
 export default CreateEventButton;

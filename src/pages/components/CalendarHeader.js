@@ -50,7 +50,7 @@ export default function CalendarHeader() {
       </h2>
 
       {/* Move to top right corner */}
-      <button className={"text-gray-600 cursor-pointer "} type="button" onClick={event =>  window.location.href='/api/auth/logout'}> Log out </button>
+      <button className={"text-gray-600 cursor-pointer ml-auto"} type="button" onClick={event =>  window.location.href='/api/auth/logout'}> Log out </button>
 
     </header>
   )

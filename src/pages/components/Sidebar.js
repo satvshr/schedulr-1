@@ -9,7 +9,8 @@ export default function Sidebar() {
   const [isSuperUser, setSuperUser] = useState(false);
 
   useEffect(() => {
-    if (user && user.name === 'ivinjoelabraham@outlook.com') {
+    console.log("username ", user.name, " super user bool ", isSuperUser)
+    if (user.name === 'ivinjoelabraham@outloo.com') {
       setSuperUser(true);
     }
   }, [user])
@@ -17,7 +18,7 @@ export default function Sidebar() {
   return (
     <div>
       <aside className='border p-5 w-64'>
-        {isSuperUser && <CreateEventButton />}
+        <CreateEventButton disabled={setSuperUser}/>
         <SmallCalendar />
       </aside>
     </div>
