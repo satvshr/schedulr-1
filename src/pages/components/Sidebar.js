@@ -1,9 +1,10 @@
+import SmallCalendar from './SmallCalendar';
 import React, { useState, useEffect } from 'react'
 import CreateEventButton from './CreateEventButton';
-import SmallCalendar from './SmallCalendar';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function Sidebar() {
+  
   const { user } = useUser();
   const [isSuperUser, setSuperUser] = useState(false);
 

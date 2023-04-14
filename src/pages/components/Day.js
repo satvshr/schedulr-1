@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
 import dayjs from 'dayjs';
+import React, { useContext } from 'react';
 import GlobalContext from '../context/GlobalContext';
 
 // Display day and date in calendar

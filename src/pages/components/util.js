@@ -1,4 +1,4 @@
-//contains shared functions thats gonna be shared across all components
+// Contains shared functions thats gonna be shared across all components
 // import { isCursorAtEnd } from '@testing-library/user-event/dist/utils'
 import dayjs from 'dayjs'
 
