@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
-import GlobalContext from '../context/GlobalContext';
-import CalendarHeader from './CalendarHeader';
-import EventModal from './EventModal';
 import { getMonth } from './util';
+import GlobalContext from '../context/GlobalContext';
+import React, { useState, useContext, useEffect } from 'react';
+import EventModal from './EventModal';
+import CalendarHeader from './CalendarHeader';
 import Sidebar from './Sidebar';
 import Month from './Month';
 

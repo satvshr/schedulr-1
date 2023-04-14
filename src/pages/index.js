@@ -1,45 +1,35 @@
-import Calendar from './components/Calendar';
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Calendar from './components/Calendar';
+import About_Page from './components/About_Page';
 
 const Home = () => {
+
   const { user } = useUser();
   const bodyStyle = {
     backgroundColor: 'white',
     backgroundImage: 'none'
 
   };
-  
+
   // Logged In
   if (user) {
-    return(
+    return (
       <>
-      <body style={bodyStyle}>
-
-      <Calendar />
-      </body>
+        <body style={bodyStyle}>
+          <Calendar />
+        </body>
       </>
     )
   }
-  
-  // Logged out
-  return (
-    <>
-    <main>
 
-      <img alt="schedulr-icon" className={"home-icon-calendar"} src={'./icon.png'} />
-      <div className={"home-schedulr"}>SCHEDULR</div>
-      <div className={"home-about-us"}>ABOUT US</div>
-      
-        <h1 className={"home-content-h1"}>You won't believe how useless this app is.</h1>
-        <p className={"home-content-p"}>
-          That’s right, we put the u in useless by holding you at gunpoint to use this app. It’s either death or schedulr. You
-          choose.
-        </p>
-        <button className={"home-button"} type="button" onClick={event =>  window.location.href='/api/auth/login'}> GET STARTED </button>
-      
-    </main>
-    </>
-  )
+  // Logged out
+  else { 
+    return (
+      <>
+        <About_Page />
+      </>
+    )
+  }
 }
 
-export default Home;
+export default Home

@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useState } from "react";
-import GlobalContext from "../context/GlobalContext";
+import React, { useCallback, useContext, useState } from "react"
+import GlobalContext from "../context/GlobalContext"
 
-const labelClasses = ["green", "blue", "red"];
+const labelClasses = ["green", "blue", "red"]
 
 export default function EventModal() {
   
@@ -72,6 +72,7 @@ export default function EventModal() {
         
         <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
           
+          {/* TODO: Icons instead of text */}
           <span className="material-icons-outlined text-gray-400">
             drag_handle
           </span>

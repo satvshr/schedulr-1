@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Icon from './icons/plus.png'
 import React, { useContext } from 'react'
 import GlobalContext from '../context/GlobalContext'
+import Image from 'next/image'
+import Icon from './icons/plus.png'
 
 function CreateEventButton() {
   

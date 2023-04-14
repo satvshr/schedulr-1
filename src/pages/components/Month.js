@@ -1,5 +1,5 @@
-import Day from './Day'
 import React from 'react'
+import Day from './Day'
 
 function Month({month}) {
   

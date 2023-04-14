@@ -1,7 +1,6 @@
-import dayjs from 'dayjs'
-import React, { useContext } from 'react'
 import GlobalContext from '../context/GlobalContext'
-// import '../dist/output.css';
+import React, { useContext } from 'react'
+import dayjs from 'dayjs'
 
 export default function CalendarHeader() {
   
@@ -26,7 +25,7 @@ export default function CalendarHeader() {
       <img src={'./icon.png'} alt="Calendar" className='mr-12 w-12 h-12'/> 
       
       <h1 className='mr-10 text-xl text-gray-500 font-bold'>
-        Calendar
+        Schedulr
       </h1>
       
       <button className="border rounded py-2 px-4 mr-5" onClick={handleReset}>
@@ -51,7 +50,7 @@ export default function CalendarHeader() {
       </h2>
 
       {/* Move to top right corner */}
-      <button className={"text-gray-600"} type="button" onClick={event =>  window.location.href='/api/auth/logout'}> Log out </button>
+      <button className={"text-gray-600 cursor-pointer "} type="button" onClick={event =>  window.location.href='/api/auth/logout'}> Log out </button>
 
     </header>
   )

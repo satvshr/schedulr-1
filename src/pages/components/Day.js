@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import React, { useContext } from 'react';
 import GlobalContext from '../context/GlobalContext';
+import React, { useContext } from 'react';
 
 // Display day and date in calendar
 export default function Day({day, rowIdx}) {
@@ -33,7 +33,7 @@ export default function Day({day, rowIdx}) {
             setDaySelected(day);
             setShowEventModal(true);
         }}>
-              {""}
+
         </div>
     </div>
   

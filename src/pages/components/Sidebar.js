@@ -1,7 +1,7 @@
-import SmallCalendar from './SmallCalendar';
-import React, { useState, useEffect } from 'react'
-import CreateEventButton from './CreateEventButton';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import React, { useState, useEffect } from 'react'
+import SmallCalendar from './SmallCalendar';
+import CreateEventButton from './CreateEventButton';
 
 export default function Sidebar() {
   
