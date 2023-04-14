@@ -3,11 +3,21 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 
 const Home = () => {
   const { user } = useUser();
+  const bodyStyle = {
+    backgroundColor: 'white',
+    backgroundImage: 'none'
+
+  };
   
   // Logged In
   if (user) {
     return(
+      <>
+      <body style={bodyStyle}>
+
       <Calendar />
+      </body>
+      </>
     )
   }
   
