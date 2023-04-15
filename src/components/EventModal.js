@@ -16,19 +16,23 @@ export default function EventModal() {
   } = useContext(GlobalContext);
 
   const [title, setTitle] = useState(
-    selectedEvent ? selectedEvent.title : ""
+    selectedEvent ? selectedEvent.title : selectedEvent ? selectedEvent.title : ""
   );
   const [description, setDescription] = useState(
-    selectedEvent ? selectedEvent.description : ""
+    selectedEvent ? selectedEvent.description : selectedEvent ? selectedEvent.description : ""
   );
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
       : labelsClasses[0]
   );
-
+  
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); //IMP CHECK LATERRRR
+    if (!selectedLabel) {
+      alert("Please select a label.");
+      return;
+    }  
     const calendarEvent = {
       title,
       description,
