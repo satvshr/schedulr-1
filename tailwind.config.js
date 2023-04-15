@@ -5,10 +5,10 @@ module.exports = {
     './src/pages/components/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-      },
-    },
+    colors:{
+      'black': '#000000',
+      'white': '#FFFFFF',
+    }
   },
   plugins: [],
 }

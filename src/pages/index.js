@@ -1,6 +1,7 @@
 import { useUser } from '@auth0/nextjs-auth0/client'
 import Calendar from './components/Calendar';
-import About_Page from './components/About_Page';
+import Landing from './components/Landing';
+import NavBar from './components/NavBar';
 
 const Home = () => {
 
@@ -26,7 +27,8 @@ const Home = () => {
   else { 
     return (
       <>
-        <About_Page />
+        <NavBar />
+        <Landing />
       </>
     )
   }
