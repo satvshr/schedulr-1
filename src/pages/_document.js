@@ -8,10 +8,14 @@ export default function Document() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Raleway&display=swap" rel="stylesheet" />
+            <title>Schedulr</title>
+            <body>
+              <Main />
+              <NextScript />
+            </body>
+          </Html>
+          )
 }

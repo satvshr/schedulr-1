@@ -10,7 +10,7 @@ function NavBar() {
     }
 
   return (
-    <div class="fixed left-0 top-0 w-full z-10">
+    <div class="fixed left-0 top-0 w-full z-10 border-b-4">
     <div class="flex order-1 items-center justify-between p-4 text-black">
         <Link href="/"><h1 class="font-bold text-4xl"> Schedulr </h1></Link>
         <ul class="hidden order-2 sm:flex">
