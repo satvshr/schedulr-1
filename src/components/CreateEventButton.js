@@ -6,7 +6,6 @@ import Icon from './icons/plus.png'
 function CreateEventButton(disabledBool) {
 
   const { setShowEventModal } = useContext(GlobalContext)
-  console.log("disabled.disabled", disabledBool)
   if (disabledBool) {
     return (
       <button disabled onClick={() => setShowEventModal(true)} className='border p-2 rounded-full flex items-center shadow-md hover:shadow-2xl'>
