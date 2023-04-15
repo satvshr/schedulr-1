@@ -8,8 +8,7 @@ const Home = () => {
   const { user } = useUser();
   const bodyStyle = {
     backgroundColor: 'white',
-    backgroundImage: 'none'
-
+    backgroundImage: 'none',
   };
 
   // Logged In
