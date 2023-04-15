@@ -27,6 +27,7 @@ function Landing() {
     return (
         <>
             <div class="fixed left-0 top-0 w-full z-10 border-black border-b-4 bg-white">
+
                 <div class="flex order-1 items-center justify-between p-4 text-black">
                     <Link href="/"><h1 class="font-bold text-4xl"> Schedulr </h1></Link>
                     <ul class="hidden order-2 sm:flex">
@@ -67,6 +68,7 @@ function Landing() {
                     </div>
                 </div>
             </div>
+            
             <div id="Top" class="flex h-screen">
                 <div class="m-auto text-center">
                     <h1 class="text-7xl p-5 md:text-9xl">Excellence starts here.</h1>
