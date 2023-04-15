@@ -10,7 +10,7 @@ function NavBar() {
     }
 
   return (
-    <div class="fixed left-0 top-0 w-full z-10 border-b-4">
+    <div class="fixed left-0 top-0 w-full z-10 border-black border-b-4">
     <div class="flex order-1 items-center justify-between p-4 text-black">
         <Link href="/"><h1 class="font-bold text-4xl"> Schedulr </h1></Link>
         <ul class="hidden order-2 sm:flex">
@@ -24,7 +24,9 @@ function NavBar() {
                 <Link href='/'>Contact Us</Link>
             </li>
         </ul>
-        <button class="hidden order-3 sm:block">Log In</button>
+        <div class="hidden sm:block order-3 border-transparent border-4 hover:border-black transition duration:500 ease-in p-2">
+            <button class="font-bold text-2xl">Log In</button>
+        </div>
 
         {/* Mobile */}
         <div onClick={handleNav} class="block sm:hidden z-10">
