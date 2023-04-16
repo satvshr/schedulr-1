@@ -16,7 +16,7 @@ export default function Labels() {
             }
             className={`form-checkbox h-5 w-5 rounded focus:ring-0 cursor-pointer`}
           />
-          <span className="ml-2 text-blue-700 capitalize">{lbl}</span>
+          <span className="ml-2 text-gray-700 capitalize">{lbl}</span>
         </label>
       ))}
     </React.Fragment>

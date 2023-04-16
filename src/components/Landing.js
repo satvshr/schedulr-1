@@ -126,7 +126,7 @@ function Landing() {
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
                         <div className='grid1-item border-4 border-black p-4'>
-                            <h3 className='text-xl sm:text-3xl'>Sativk M</h3>
+                            <h3 className='text-xl sm:text-3xl'>Satvik M</h3>
                             <p className='sm:text-xl'>989-992-192<br />satvik.work@gmaik.com</p>
                         </div>
                         <div className='grid1-item border-4 border-black p-4'>
