@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
+import { styled } from '@mui/material/styles';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
-
+import Link from 'next/link';
+import Grid from '@mui/material/Unstable_Grid2';
+import Paper from '@mui/material/Paper';// Grid version 2
 
 function Landing() {
+
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
 
     const [nav, setNav] = useState(false);
     const handleNav = () => {
         setNav(!nav)
-    }
-
-    const [darkMode, setDarkMode] = useState(false);
-    const handleMode = () => {
-        console.log(darkMode)
-        setDarkMode(!darkMode)
     }
 
     function smoothScroll(target) {
@@ -26,13 +31,13 @@ function Landing() {
 
     return (
         <>
-            <div class="fixed left-0 top-0 w-full z-10 border-black border-b-4 bg-white">
+            <div class="relative left-0 top-0 w-full z-10 border-black border-b-4 bg-white">
 
                 <div class="flex order-1 items-center justify-between p-4 text-black">
                     <Link href="/"><h1 class="font-bold text-4xl"> Schedulr </h1></Link>
                     <ul class="hidden order-2 sm:flex">
                         <li class="p-4">
-                            <button onClick={() => { smoothScroll("#Features"); handleMode();}} class="p-1 border-transparent border-b-4 hover:border-black transition duration:500 ease-in">Features</button>
+                            <button onClick={() => smoothScroll("#Features")} class="p-1 border-transparent border-b-4 hover:border-black transition duration:500 ease-in">Features</button>
                         </li>
                         <li class="p-4">
                             <button onClick={() => smoothScroll("#FAQs")} class="p-1 border-transparent border-b-4 hover:border-black transition duration:500 ease-in" href='/'>FAQs</button>
@@ -42,7 +47,7 @@ function Landing() {
                         </li>
                     </ul>
                     <div class="hidden sm:block order-3 border-transparent border-4 hover:border-black transition duration:500 ease-in p-2">
-                        <button class="font-bold text-2xl">Log In</button>
+                        <button onClick={event => window.location.href = 'api/auth/login'} class="font-bold text-2xl">Log In</button>
                     </div>
 
                     {/* Mobile */}
@@ -56,52 +61,42 @@ function Landing() {
             items-center w-full h-screen text-center bg-black ease-in duration-300'}>
                         <ul>
                             <li class="p-4 text-4xl">
-                                <Link href='/'>Features</Link>
+                                <button onClick={() => {smoothScroll("#Features"), handleNav()}}>Features</button>
                             </li>
                             <li class="p-4 text-4xl hover:text-gray-500">
-                                <Link href='/'>FAQs</Link>
+                                <button onClick={() => {smoothScroll("#FAQs"), handleNav()}}>FAQs</button>
                             </li>
                             <li class="p-4 text-4xl hover:text-gray-500">
-                                <Link href='/'>Contact Us</Link>
+                                <button onClick={() => {smoothScroll("#ContactUs"), handleNav()}}>Contact Us</button>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
+
             <div id="Top" class="flex h-screen">
                 <div class="m-auto text-center">
                     <h1 class="text-7xl p-5 md:text-9xl">Excellence starts here.</h1>
                     <button class="border-black border-4 p-5 hover:bg-black hover:text-white"
                         onClick={() => smoothScroll("#Features")}>
-                        GET STARTED
+                        LEARN MORE
                     </button>
                 </div>
             </div>
             <div id="Features" class="flex h-screen">
-                <div class="m-auto text-center">
-                    <h1 class="text-7xl p-5 md:text-9xl">Excellence starts here.</h1>
-                    <button class="border-black border-4 p-5 hover:bg-black hover:text-white"
-                        onClick={() => smoothScroll("#FAQs")}>GET STARTED
-                    </button>
+                <div>
+                    <h1 className='mt-10 ml-5 text-6xl'>FEATURES</h1>
                 </div>
+
             </div>
             <div id="FAQs" class="flex h-screen">
-                <div class="m-auto text-center">
-                    <h1 class="text-7xl p-5 md:text-9xl">Excellence starts here.</h1>
-                    <button class="border-black border-4 p-5 hover:bg-black hover:text-white"
-                        onClick={() => smoothScroll("#ContactUs")}>GET STARTED
-                    </button>
-                </div>
+                <h1 className='mt-10 ml-5 text-6xl'>FAQs</h1>
             </div>
-            <div id="ContactUs" class="flex h-screen">
-                <div class="m-auto text-center">
-                    <h1 class="text-7xl p-5 md:text-9xl">Excellence starts here.</h1>
-                    <button class="border-black border-4 p-5 hover:bg-black hover:text-white"
-                        onClick={() => smoothScroll("#Top")}>GET STARTED
-                    </button>
-                </div>
+            <div id="ContactUs" class="flex h-screen justify-center">
+                <h1 className='mt-10 ml-5 text-6xl'>Contact Us</h1>
             </div>
+            {/* </div>
+            </div> */}
         </>
     )
 }
