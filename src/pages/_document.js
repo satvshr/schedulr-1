@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html className='h-screen w-screen' lang="en">
       <Head />
       <link
         rel="stylesheet"
