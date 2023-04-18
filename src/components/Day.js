@@ -1,45 +1,51 @@
- import dayjs from 'dayjs';
-import GlobalContext from '../context/GlobalContext';
-import React, { useContext, useEffect, useState } from 'react';
+import dayjs from "dayjs";
+import React, { useContext, useState, useEffect } from "react";
+import GlobalContext from "../context/GlobalContext";
 
-// Display day and date in calendar
-export default function Day({day, rowIdx}) {
-  const {setDaySelected, setShowEventModal, filteredEvents, setSelectedEvent} = useContext(GlobalContext)
+export default function Day({ day, rowIdx }) {
+  const [dayEvents, setDayEvents] = useState([]);
+  const {
+    setDaySelected,
+    setShowEventModal,
+    filteredEvents,
+    setSelectedEvent,
+  } = useContext(GlobalContext);
 
-  const [dayEvents, setDayEvents] = useState([])
   useEffect(() => {
-    const events = filteredEvents.filter(evt => dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+    const events = filteredEvents.filter(
+      (evt) =>
+        dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
     );
-    setDayEvents(events)
+    setDayEvents(events);
   }, [filteredEvents, day]);
-  // What is this for?
+
   function getCurrentDayClass() {
-    return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY") ? 'bg-blue text-white rounded-full w-7' : "";
+    return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+      ? "bg-blue-600 text-white rounded-full w-7"
+      : "";
   }
-  
-  
   return (
-    
-    <div className='border border-gray-200 flex flex-col'>
-        
-        <header className='flex flex-col items-center'>
-            
-            {rowIdx === 0 && (
-              <p className='text-small mt-1'>{day.format('ddd').toUpperCase()}</p>
-            )}
-            
-            <p className='test-sm p-1 my-1 text-center ${getCurrentDayClass()}'>
-            
-            {day.format('DD')}
-            
-            </p>
-        </header>
-        
-        <div className='flex-1 cursor-pointer' onClick={() => {
-            setDaySelected(day);
-            setShowEventModal(true);
-        }}>
- {dayEvents.map((evt, idx) => (
+    <div className="flex flex-col border border-gray-200">
+      <header className="flex flex-col items-center">
+        {rowIdx === 0 && (
+          <p className="mt-1 text-sm">
+            {day.format("ddd").toUpperCase()}
+          </p>
+        )}
+        <p
+          className={`text-sm p-1 my-1 text-center  ${getCurrentDayClass()}`}
+        >
+          {day.format("DD")}
+        </p>
+      </header>
+      <div
+        className="flex-1 cursor-pointer"
+        onClick={() => {
+          setDaySelected(day);
+          setShowEventModal(true);
+        }}
+      >
+        {dayEvents.map((evt, idx) => (
           <div
             key={idx}
             onClick={() => setSelectedEvent(evt)}
@@ -48,8 +54,7 @@ export default function Day({day, rowIdx}) {
             {evt.title}
           </div>
         ))}
-        </div>
+      </div>
     </div>
-  
-  )
+  );
 }
