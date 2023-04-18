@@ -84,35 +84,35 @@ function Landing() {
                 </div>
             </div>
             <div id="FAQs" class="relative h-screen bg-black text-white items-center justify-center">
-                <h1 className='absolute w-full top-3 left-0 text-4xl sm:text-5xl lg:text-8xl text-center mt-0 '>Reviews</h1>
-                <div className='flex h-full items-center justify-center'>
+                <h1 className='absolute left-0 w-full mt-0 text-4xl text-center top-3 sm:text-5xl lg:text-8xl '>Reviews</h1>
+                <div className='flex items-center justify-center h-full'>
 
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8'>
-                        <div className='grid1-item border-4 border-white p-4'>
+                    <div className='grid grid-cols-1 gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3'>
+                        <div className='p-4 border-4 border-white grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>Merlin</h3>
                             <p className='sm:text-xl'>"Schedulr is pure magic."</p>
                         </div>
 
-                        <div className='grid1-item border-4 border-white p-4'>
+                        <div className='p-4 border-4 border-white grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>George W.</h3>
                             <p className='sm:text-xl'>"I fear no election when I have Schedulr"</p>
                         </div>
 
-                        <div className='grid1-item border-4 border-white p-4'>
+                        <div className='p-4 border-4 border-white grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>Satvik M.</h3>
                             <p className='sm:text-xl'>"I got 9.92 CPGA because of Schedulr"</p>
                         </div>
 
-                        <div className='grid1-item border-4 border-white p-4'>
+                        <div className='p-4 border-4 border-white grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>T. Kettle</h3>
                             <p className='sm:text-xl'>"I owe Schedulr my life. It's the one thing that holds me responsible."</p>
                         </div>
 
-                        <div className='grid1-item border-4 border-white p-4'>
+                        <div className='p-4 border-4 border-white grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>BiscuitBobby</h3>
                             <p className='sm:text-xl'>"I mean, it's not bad I guess."</p>
                         </div>
-                        <div className='hidden md:block grid1-item border-4 border-white p-4'>
+                        <div className='hidden p-4 border-4 border-white md:block grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>H. Granger</h3>
                             <p className='sm:text-xl'>"Scehdulr was crucial for me to become the MoM."</p>
                         </div>
@@ -121,15 +121,15 @@ function Landing() {
                 </div>
             </div>
             <div id="ContactUs" class="relative h-screen items-center justify-center">
-                <h1 className='absolute w-full top-3 left-0 text-6xl sm:text-5xl lg:text-8xl text-center mt-0'>Contact Us</h1>
-                <div className='flex h-full items-center justify-center'>
+                <h1 className='absolute left-0 w-full mt-0 text-6xl text-center top-3 sm:text-5xl lg:text-8xl'>Contact Us</h1>
+                <div className='flex items-center justify-center h-full'>
 
-                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
-                        <div className='grid1-item border-4 border-black p-4'>
+                    <div className='grid grid-cols-1 gap-8 sm:grid-cols-2'>
+                        <div className='p-4 border-4 border-black grid1-item'>
                             <h3 className='text-xl sm:text-3xl'>Satvik M</h3>
                             <p className='sm:text-xl'>989-992-192<br />satvik.work@gmaik.com</p>
                         </div>
-                        <div className='grid1-item border-4 border-black p-4'>
+                        <div className='p-4 border-4 border-black grid1-item '>
                             <h3 className='text-xl sm:text-3xl'>Ivin Joel</h3>
                             <p className='sm:text-xl'>823-523-123<br />ivinjabraham.work@gmail.com</p>
                         </div>

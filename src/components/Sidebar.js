@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import SmallCalendar from './SmallCalendar';
 import CreateEventButton from './CreateEventButton';
 import Labels from './Labels';
+import UserInfo from './UserInfo';
 
 export default function Sidebar() {
   
@@ -17,7 +18,8 @@ export default function Sidebar() {
 
   return (
     <div>
-      <aside className='border p-5 w-64'>
+      <aside className='w-64 p-5 border'>
+        <UserInfo />
         <CreateEventButton disabled={!isSuperUser}/>
         <SmallCalendar />
         <Labels />
