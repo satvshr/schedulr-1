@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useReducer, useState } from 'react'
 import dayjs from 'dayjs'
 import axios from 'axios';
 
-async function savedEventsReducer(state, { type, payload }) {
+function savedEventsReducer(state, { type, payload }) {
   switch (type) {
     case 'push':
       const dat = [...state, payload];
@@ -16,17 +16,17 @@ async function savedEventsReducer(state, { type, payload }) {
       console.log(jsonArray);
       const jsonString = JSON.stringify(jsonArray);
       console.log(jsonString);
-      await axios.post('http://localhost:8000/api', jsonString);
+      axios.post('http://localhost:8000/api', jsonString);
       
       return dat;
     case 'update':
       const update = state.map(evt => (evt.id === payload.id ? payload : evt));
       console.log(update);
-      await axios.post('http://localhost:8000',update);
+      axios.post('http://localhost:8000',update);
       return update;
     case 'delete':
       const del = state.filter(evt => evt.id !== payload.id);
-      await axios.post('http://localhost:8000', { events: del });
+      axios.post('http://localhost:8000', { events: del });
       return del;
     default:
       throw new Error();
