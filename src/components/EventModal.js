@@ -1,51 +1,57 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from "@auth0/nextjs-auth0/client";
 
+const colorNameToId = {
+  green: "1",
+  blue: "2",
+  red: "11",
+};
 
 const labelsClasses = [
-  "green",
-  "blue",
-  "red",
+  { name: "green", colorId: "1" },
+  { name: "blue", colorId: "2" },
+  { name: "red", colorId: "11" },
 ];
 
-export default function EventModal() {
-  const {
-    setShowEventModal,
-    daySelected,
-    dispatchCalEvent,
-    selectedEvent,
-  } = useContext(GlobalContext);
+export default function EventModal({ user }) {
+  const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
+    useContext(GlobalContext);
 
   const [title, setTitle] = useState(
-    selectedEvent ? selectedEvent.title : selectedEvent ? selectedEvent.title : ""
+    selectedEvent ? selectedEvent.title : ""
   );
   const [description, setDescription] = useState(
-    selectedEvent ? selectedEvent.description : selectedEvent ? selectedEvent.description : ""
+    selectedEvent ? selectedEvent.description : ""
   );
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent
-      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
+      ? labelsClasses.find((lbl) => lbl.name === selectedEvent.label)
       : labelsClasses[0]
   );
-  
+
   function handleSubmit(e) {
-    e.preventDefault(); //IMP CHECK LATERRRR
+    e.preventDefault();
+
     if (!selectedLabel) {
       alert("Please select a label.");
       return;
-    }  
-    if (user.name !== "ivinjoelabraham@outlook.com"){
+    }
+    if (user && user.name !== "ivinjoelabraham@outlook.com") {
       alert("Only admins are allowed to update events.");
       return;
     }
+
+    const selectedColor = selectedLabel.name.toLowerCase();
+    const selectedColorId = colorNameToId[selectedColor];
+
     const calendarEvent = {
       title,
       description,
-      label: selectedLabel,
+      colorId: selectedColorId,
       day: daySelected.valueOf(),
-      id: selectedEvent ? selectedEvent.id : Date.now(),
     };
+
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
@@ -54,18 +60,12 @@ export default function EventModal() {
 
     setShowEventModal(false);
   }
-  const { user } = useUser();
 
-  if (user.name === 'ivinjoelabraham@outlook.com') {
   return (
-    
-
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
       <form className="bg-white rounded-lg shadow-2xl w-1/4">
         <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
-          <span className="material-icons text-gray-400">
-            drag_handle
-          </span>
+          <span className="material-icons text-gray-400">drag_handle</span>
           <div>
             {selectedEvent && (
               <span
@@ -82,9 +82,7 @@ export default function EventModal() {
               </span>
             )}
             <button onClick={() => setShowEventModal(false)}>
-              <span className="material-icons text-gray-400">
-                close
-              </span>
+              <span className="material-icons text-gray-400">close</span>
             </button>
           </div>
         </header>
@@ -100,13 +98,9 @@ export default function EventModal() {
               className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               onChange={(e) => setTitle(e.target.value)}
             />
-            <span className="material-icons text-gray-400">
-              schedule
-            </span>
+            <span className="material-icons text-gray-400">schedule</span>
             <p>{daySelected.format("dddd, MMMM DD")}</p>
-            <span className="material-icons text-gray-400">
-              segment
-            </span>
+            <span className="material-icons text-gray-400">segment</span>
             <input
               type="text"
               name="description"
@@ -124,8 +118,8 @@ export default function EventModal() {
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                  >
+                  className={`bg-${lblClass.name}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                >
                   {selectedLabel === lblClass && (
                     <span className="material-icons text-white text-sm">
                       check
@@ -148,82 +142,4 @@ export default function EventModal() {
       </form>
     </div>
   );
-  }
-  else {
-    return(
-      <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded-lg shadow-2xl w-1/4">
-        <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
-          <span className="material-icons text-gray-400">
-            drag_handle
-          </span>
-          <div>
-            <button onClick={() => setShowEventModal(false)}>
-              <span className="material-icons text-gray-400">
-                close
-              </span>
-            </button>
-          </div>
-        </header>
-        <div className="p-3">
-          <div className="grid grid-cols-1/5 items-end gap-y-7">
-            <div></div>
-            <input
-              type="text"
-              name="title"
-              placeholder="Add title"
-              value={title}
-              required
-              className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <span className="material-icons text-gray-400">
-              schedule
-            </span>
-            <p>{daySelected.format("dddd, MMMM DD")}</p>
-            <span className="material-icons text-gray-400">
-              segment
-            </span>
-            <input
-              type="text"
-              name="description"
-              placeholder="Add a description"
-              value={description}
-              required
-              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <span className="material-icons text-gray-400">
-              bookmark_border
-            </span>
-            <div className="flex gap-x-2">
-              {labelsClasses.map((lblClass, i) => (
-                <span
-                  key={i}
-                  onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                  >
-                  {selectedLabel === lblClass && (
-                    <span className="material-icons text-white text-sm">
-                      check
-                    </span>
-                  )}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <footer className="flex justify-end border-t p-3 mt-5">
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
-          >
-            Save
-          </button>
-        </footer>
-      </form>
-    </div>
-    )
-  }
 }
