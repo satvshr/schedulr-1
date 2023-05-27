@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 const colorNameToId = {
   green: "1",
@@ -9,9 +8,9 @@ const colorNameToId = {
 };
 
 const labelsClasses = [
-  { name: "green", colorId: "1" },
-  { name: "blue", colorId: "2" },
-  { name: "red", colorId: "11" },
+  "green",
+  "red",
+  "blue"
 ];
 
 export default function EventModal({ user }) {
@@ -26,40 +25,43 @@ export default function EventModal({ user }) {
   );
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent
-      ? labelsClasses.find((lbl) => lbl.name === selectedEvent.label)
+      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
       : labelsClasses[0]
-  );
+  );  
 
   function handleSubmit(e) {
     e.preventDefault();
-
+  
     if (!selectedLabel) {
       alert("Please select a label.");
       return;
     }
+  
     if (user && user.name !== "ivinjoelabraham@outlook.com") {
-      alert("Only admins are allowed to update events.");
+      alert("Please login to create an event.");
       return;
     }
-
-    const selectedColor = selectedLabel.name.toLowerCase();
+  
+    const selectedColor = selectedLabel;
     const selectedColorId = colorNameToId[selectedColor];
-
+  
     const calendarEvent = {
       title,
       description,
+      label: selectedLabel,
       colorId: selectedColorId,
       day: daySelected.valueOf(),
+      id: null,
     };
-
+  
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }
-
+  
     setShowEventModal(false);
-  }
+  }  
 
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
@@ -118,7 +120,7 @@ export default function EventModal({ user }) {
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass.name}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {selectedLabel === lblClass && (
                     <span className="material-icons text-white text-sm">
