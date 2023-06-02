@@ -6,57 +6,52 @@ import axios from 'axios';
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [showEventModal, setShowEventModal] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState([]);
   const [daySelected, setDaySelected] = useState(dayjs());
   const [labels, setLabels] = useState([]);
-  const isLoading = initEvents(); // Extract loading state
-
-  // Return a loading indicator if the data is still loading
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [savedEvents, setSavedEvents] = useState([]);
 
   // Once the data is loaded, proceed with the rest of the code
-  const [savedEvents, dispatchCalEvent] = useReducer(
-    savedEventsReducer,
-    [],
-    initEvents
-  );
+  // const [savedEvents, dispatchCalEvent] = useReducer(
+  //   savedEventsReducer,
+  //   [],
+  //   initEvents
+  // );
 
-  useEffect(() => {
-    if (!showEventModal) {
-      setSelectedEvent(null);
-    }
-  }, [showEventModal]);
 
-  console.log(savedEvents);
-  console.log(typeof savedEvents);
+
   const filteredEvents = useMemo(() => {
-    return savedEvents.filter((evt) =>
+    if (!isLoading) {
+      return savedEvents.filter((evt) =>
       labels
         .filter((lbl) => lbl.checked)
         .map((lbl) => lbl.label)
         .includes(evt.label)
     );
-  }, [savedEvents, labels]);
+    }
+  }, [savedEvents, labels, isLoading]);
 
-  useEffect(() => {
-    setLabels((prevLabels) => {
-      return [...new Set(savedEvents.map((evt) => evt.label))].map((label) => {
-        const currentLabel = prevLabels.find((lbl) => lbl.label === label);
-        return {
-          label,
-          checked: currentLabel ? currentLabel.checked : true,
-        };
-      });
-    });
-  }, [savedEvents]);
 
   useEffect(() => {
     if (!showEventModal) {
-      setSelectedEvent(null);
+      setSelectedEvent([]);
     }
   }, [showEventModal]);
+
+  useEffect(() => {
+    if(!isLoading) {
+      setLabels((prevLabels) => {
+        return [...new Set(savedEvents.map((evt) => evt.label))].map((label) => {
+          const currentLabel = prevLabels.find((lbl) => lbl.label === label);
+          return {
+            label,
+            checked: currentLabel ? currentLabel.checked : true,
+          };
+        });
+      });
+    }
+  }, [savedEvents, isLoading]);
 
   function updateLabel(label) {
     setLabels(labels.map((lbl) => (lbl.label === label.label ? label : lbl)));
@@ -100,32 +95,29 @@ export default function ContextWrapper(props) {
   }
 }
 
-function initEvents() {
-  const [storageEvents, setStorageEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+useEffect(() => {
+  async function fetchData() {
+    try {
+      const response = await fetch('http://localhost:8000/get');
+      const data = await response.json();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('http://localhost:8000/get');
-        const data = await response.json();
+      // Process the fetched data
+      console.log(data);
 
-        // Process the fetched data
-        console.log(data);
-
-        setStorageEvents(data);
-        setIsLoading(false); // Set loading state to false once the data is loaded
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
+      setSavedEvents(data);
+      setIsLoading(false); // Set loading state to false once the data is loaded
+    } catch (error) {
+      console.error('Error fetching events:', error);
     }
+  }
 
-    fetchData();
-  }, []);
+  fetchData();
+}, []);
 
-  return isLoading; // Return loading state
-}
-
+  // Return a loading indicator if the data is still loading
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <GlobalContext.Provider
       value={{
@@ -135,7 +127,6 @@ function initEvents() {
         setShowEventModal,
         daySelected,
         setDaySelected,
-        dispatchCalEvent,
         savedEvents,
         selectedEvent,
         setSelectedEvent,

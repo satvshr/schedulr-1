@@ -57,6 +57,7 @@ export default function EventModal({ user }) {
     if (selectedEvent) {
       dispatchCalEvent({ type: "update", payload: calendarEvent });
     } else {
+      console.log("sub")
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }
   

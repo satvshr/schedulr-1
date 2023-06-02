@@ -1,6 +1,5 @@
 import { useUser } from '@auth0/nextjs-auth0/client';
 import React, { useState, useEffect } from 'react'
-import SmallCalendar from './SmallCalendar';
 import CreateEventButton from './CreateEventButton';
 import Labels from './Labels';
 import UserInfo from './UserInfo';
@@ -21,7 +20,6 @@ export default function Sidebar() {
       <aside className='w-64 p-5 border'>
         <UserInfo />
         <CreateEventButton disabled={!isSuperUser}/>
-        <SmallCalendar />
         <Labels />
       </aside>
     </div>

@@ -19,6 +19,7 @@ function Calendar() {
     return (
       
       <React.Fragment>
+       <div className="container">
         {showEventModal && <EventModal />}
         
         <div className="h-screen flex flex-col">
@@ -30,7 +31,7 @@ function Calendar() {
           </div>
         
         </div>
-      
+      </div>
       </React.Fragment>
     
     );
