@@ -18,8 +18,7 @@ export default function ContextWrapper(props) {
     null
   );
 
-  console.log(savedEvents)
-  console.log(typeof savedEvents)
+
 
   const filteredEvents = useMemo(() => {
     if (!isLoading) {
@@ -32,6 +31,9 @@ export default function ContextWrapper(props) {
     }
   }, [savedEvents, labels, isLoading]);
 
+  useEffect(() => {
+    console.log(savedEvents)
+  }, [savedEvents])
 
   useEffect(() => {
     if (!showEventModal) {
@@ -74,14 +76,19 @@ export default function ContextWrapper(props) {
         const data = await response.json();
 
         // Process the received data in React
-        console.log(data);
-
+        
+        if (data && Array.isArray(data)){
+          console.log(data)
+          return data
+        }
+        
         // Return the received data
-        return data;
+        
       } catch (error) {
         console.error('Error:', error);
         throw error;
       }
+      break
     case 'update':
       const update = [payload];
       const jsonstring = JSON.stringify(update);
@@ -101,11 +108,12 @@ useEffect(() => {
   dispatchCalEvent({type: "push", payload: null});
 }, []);
 
-useEffect(() => {
-  if (savedEvents && savedEvents.length > 0) {
-    setIsLoading(false)
-  }
-}, [savedEvents])
+// useEffect(() => {
+//   if (Array.isArray(savedEvents)) {
+//     console.log(savedEvents)
+//     setIsLoading(false)
+//   }
+// }, [savedEvents])
   // Return a loading indicator if the data is still loading
   if (isLoading) {
     return <div>Loading...</div>;
