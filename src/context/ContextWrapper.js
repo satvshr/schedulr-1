@@ -1,5 +1,5 @@
 import GlobalContext from './GlobalContext';
-import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import axios from 'axios';
 
@@ -85,13 +85,30 @@ export default function ContextWrapper(props) {
     case 'update':
       const update = [payload];
       const jsonstring = JSON.stringify(update);
-      axios.post('http://localhost:8000/api', jsonstring);
+      await axios.post('http://localhost:8000/api', jsonstring);
 
-      return state.map((evt) => (evt.id === payload.id ? payload : evt));
+      const resp = await fetch('http://localhost:8000/get');
+      const da = await resp.json();
+
+      // Process the received data in React
+      console.log(da);
+
+      // Return the received data
+      setSavedEvents(da);
+      break
     case 'delete':
       const del = [payload];
-      axios.post('http://localhost:8000/deletion', del);
-      return state.filter((evt) => evt.id !== payload.id);
+      const Jsonstring = JSON.stringify(del);
+      await axios.post('http://localhost:8000/deletion', Jsonstring);
+      const re = await fetch('http://localhost:8000/get');
+      const d = await re.json();
+
+      // Process the received data in React
+      console.log(d);
+
+      // Return the received data
+      setSavedEvents(d);
+      break
     default:
       throw new Error();
   }

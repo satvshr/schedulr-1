@@ -59,7 +59,7 @@ export default function EventModal({ user }) {
       console.log("hif")
     } else {
       console.log("sub")
-      dispatchCalEvent("push", calendarEvent );
+      dispatchCalEvent("update", calendarEvent );
     }
   
     setShowEventModal(false);
@@ -74,10 +74,7 @@ export default function EventModal({ user }) {
             {selectedEvent && (
               <span
                 onClick={() => {
-                  dispatchCalEvent({
-                    type: "delete",
-                    payload: selectedEvent,
-                  });
+                  dispatchCalEvent("delete", selectedEvent);
                   setShowEventModal(false);
                 }}
                 className="material-icons text-gray-400 cursor-pointer"

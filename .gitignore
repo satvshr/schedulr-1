@@ -2,3 +2,5 @@ node_modules/
 .next/
 .env.local
 credentials.json
+src\context\credentials.json
+src\context\token.json
