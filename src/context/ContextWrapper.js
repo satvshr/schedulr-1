@@ -10,13 +10,14 @@ export default function ContextWrapper(props) {
   const [daySelected, setDaySelected] = useState(dayjs());
   const [labels, setLabels] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
-  // const [savedEvents, setSavedEvents] = useState([]);
+  const [savedEvents, setSavedEvents] = useState([]);
 
   // Once the data is loaded, proceed with the rest of the code
-  const [savedEvents, dispatchCalEvent] = useReducer(
-    savedEventsReducer,
-    null
-  );
+  // const [savedEvents, dispatchCalEvent] = useReducer(
+  //   savedEventsReducer,
+  //   [],
+  //   initEvents
+  // );
 
 
 
@@ -31,9 +32,6 @@ export default function ContextWrapper(props) {
     }
   }, [savedEvents, labels, isLoading]);
 
-  useEffect(() => {
-    console.log(savedEvents)
-  }, [savedEvents])
 
   useEffect(() => {
     if (!showEventModal) {
@@ -58,32 +56,27 @@ export default function ContextWrapper(props) {
   function updateLabel(label) {
     setLabels(labels.map((lbl) => (lbl.label === label.label ? label : lbl)));
   }
-  async function savedEventsReducer(state, { type, payload }) {
+  async function dispatchCalEvent(type, payload) {
   switch (type) {
     case 'push':
+      console.log("hi")
       try {
-        if (payload != null) {
-          const dat = [payload];
+        const dat = [payload];
         const jsonString = JSON.stringify(dat);
 
         // Send POST request
         await axios.post('http://localhost:8000/api', jsonString);
         console.log('Request sent');
 
-        }
         // Make GET request
         const response = await fetch('http://localhost:8000/get');
         const data = await response.json();
 
         // Process the received data in React
-        
-        if (data && Array.isArray(data)){
-          console.log(data)
-          return data
-        }
-        
+        console.log(data);
+
         // Return the received data
-        
+        setSavedEvents(data);
       } catch (error) {
         console.error('Error:', error);
         throw error;
@@ -105,15 +98,26 @@ export default function ContextWrapper(props) {
 }
 
 useEffect(() => {
-  dispatchCalEvent({type: "push", payload: null});
-}, []);
+  async function fetchData() {
+    try {
+      const response = await fetch('http://localhost:8000/get');
+      const data = await response.json();
 
-// useEffect(() => {
-//   if (Array.isArray(savedEvents)) {
-//     console.log(savedEvents)
-//     setIsLoading(false)
-//   }
-// }, [savedEvents])
+      // Process the fetched data
+      console.log(data);
+
+      setSavedEvents(data);
+      setIsLoading(false); // Set loading state to false once the data is loaded
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  }
+
+  fetchData();
+}, []);
+  useEffect(() => {
+    console.log(savedEvents)
+  }, [savedEvents])
   // Return a loading indicator if the data is still loading
   if (isLoading) {
     return <div>Loading...</div>;
@@ -129,6 +133,7 @@ useEffect(() => {
         setDaySelected,
         savedEvents,
         selectedEvent,
+        dispatchCalEvent,
         setSelectedEvent,
         setLabels,
         labels,

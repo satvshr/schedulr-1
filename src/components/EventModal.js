@@ -55,10 +55,11 @@ export default function EventModal({ user }) {
     };
   
     if (selectedEvent) {
-      dispatchCalEvent({ type: "update", payload: calendarEvent });
+      dispatchCalEvent("push", calendarEvent );
+      console.log("hif")
     } else {
       console.log("sub")
-      dispatchCalEvent({ type: "push", payload: calendarEvent });
+      dispatchCalEvent("push", calendarEvent );
     }
   
     setShowEventModal(false);
