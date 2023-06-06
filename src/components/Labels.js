@@ -4,10 +4,10 @@ import GlobalContext from "../context/GlobalContext";
 export default function Labels() {
   const { labels, updateLabel } = useContext(GlobalContext);
   return (
-    <React.Fragment>
-      <p className="text-gray-500 font-bold mt-10">Label</p>
+    <>
+      <p className="mt-10 font-bold text-gray-500">Label</p>
       {labels.map(({ label: lbl, checked }, idx) => (
-        <label key={idx} className="items-center mt-3 block">
+        <label key={idx} className="items-center block mt-3">
           <input
             type="checkbox"
             checked={checked}
@@ -19,6 +19,6 @@ export default function Labels() {
           <span className="ml-2 text-gray-700 capitalize">{lbl}</span>
         </label>
       ))}
-    </React.Fragment>
+    </>
   );
 }
