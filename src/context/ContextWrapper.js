@@ -2,6 +2,7 @@ import GlobalContext from './GlobalContext';
 import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import axios from 'axios';
+import Landing from '../components/Landing';
 
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
@@ -127,7 +128,7 @@ useEffect(() => {
 
   // Return a loading indicator if the data is still loading
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Landing />;
   }
   return (
     <GlobalContext.Provider

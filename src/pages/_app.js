@@ -1,7 +1,7 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import ContextWrapper from '../context/ContextWrapper';
 import React from "react";
-import "./styles.css";
+import "../styles/styles.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
