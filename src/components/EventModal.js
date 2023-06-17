@@ -28,7 +28,9 @@ export default function EventModal({ user }) {
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
       : labelsClasses[0]
   );  
-
+  const [id, setId] = useState(
+    selectedEvent ? selectedEvent.id : null
+  );
   function handleSubmit(e) {
     e.preventDefault();
   
@@ -51,14 +53,12 @@ export default function EventModal({ user }) {
       label: selectedLabel,
       colorId: selectedColorId,
       day: daySelected.valueOf(),
-      id: null,
+      id,
     };
   
-    if (selectedEvent) {
+    if (calendarEvent.id == null) {
       dispatchCalEvent("push", calendarEvent );
-      console.log("hif")
     } else {
-      console.log("sub")
       dispatchCalEvent("update", calendarEvent );
     }
   

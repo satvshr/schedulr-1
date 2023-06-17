@@ -59,22 +59,18 @@ export default function ContextWrapper(props) {
   async function dispatchCalEvent(type, payload) {
   switch (type) {
     case 'push':
-      console.log("hi")
       try {
         const dat = [payload];
         const jsonString = JSON.stringify(dat);
 
         // Send POST request
         await axios.post('http://localhost:8000/api', jsonString);
-        console.log('Request sent');
 
         // Make GET request
         const response = await fetch('http://localhost:8000/get');
         const data = await response.json();
-
-        // Process the received data in React
-        console.log(data);
-
+        console.log(data)
+        console.log("hi")
         // Return the received data
         setSavedEvents(data);
       } catch (error) {
@@ -83,15 +79,17 @@ export default function ContextWrapper(props) {
       }
       break
     case 'update':
+      print("higed")
       const update = [payload];
       const jsonstring = JSON.stringify(update);
+      await axios.post('http://localhost:8000/deletion', jsonstring);
+
+      // Send POST request
       await axios.post('http://localhost:8000/api', jsonstring);
 
-      const resp = await fetch('http://localhost:8000/get');
-      const da = await resp.json();
-
-      // Process the received data in React
-      console.log(da);
+      // Make GET request
+      const response = await fetch('http://localhost:8000/get');
+      const da = await response.json();
 
       // Return the received data
       setSavedEvents(da);
@@ -102,9 +100,6 @@ export default function ContextWrapper(props) {
       await axios.post('http://localhost:8000/deletion', Jsonstring);
       const re = await fetch('http://localhost:8000/get');
       const d = await re.json();
-
-      // Process the received data in React
-      console.log(d);
 
       // Return the received data
       setSavedEvents(d);
@@ -120,9 +115,6 @@ useEffect(() => {
       const response = await fetch('http://localhost:8000/get');
       const data = await response.json();
 
-      // Process the fetched data
-      console.log(data);
-
       setSavedEvents(data);
       setIsLoading(false); // Set loading state to false once the data is loaded
     } catch (error) {
@@ -132,9 +124,7 @@ useEffect(() => {
 
   fetchData();
 }, []);
-  useEffect(() => {
-    console.log(savedEvents)
-  }, [savedEvents])
+
   // Return a loading indicator if the data is still loading
   if (isLoading) {
     return <div>Loading...</div>;
