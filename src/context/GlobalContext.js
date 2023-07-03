@@ -22,6 +22,9 @@ const GlobalContext = React.createContext({
     updateLabel: () => {},
 
     filteredEvents: [],
+
+    user: null,
+    setUser: () => {},
 })
 
 export default GlobalContext;

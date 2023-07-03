@@ -1,10 +1,10 @@
-import { useUser } from '@auth0/nextjs-auth0/client'
 import Calendar from '../components/Calendar';
 import Landing from '../components/Landing';
+import GlobalContext from '../context/GlobalContext';
+import React, { useContext } from 'react'
 
 const Home = () => {
-
-  const { user } = useUser();
+  const { user } = useContext(GlobalContext);
   const bodyStyle = {
     backgroundColor: 'white',
     backgroundImage: 'none',
@@ -12,6 +12,7 @@ const Home = () => {
 
   // Logged In
   if (user) {
+    console.log(user)
     return (
       <>
         <body style={bodyStyle}>

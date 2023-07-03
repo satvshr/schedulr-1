@@ -1,10 +1,13 @@
 body {
   font-family: 'Raleway', sans-serif;
+  background-color: #EBEBEB;
+    overflow: hidden;
 }
 
 .user-icon {
   width: 35px;
 }
+
 
 @tailwind base;
 @tailwind components;

@@ -1,14 +1,14 @@
-import React from 'react'
-import { useUser } from '@auth0/nextjs-auth0/client'
+import React, { useContext } from 'react'
+import GlobalContext from '../context/GlobalContext';
 
 function UserInfo() {
-  const { user }= useUser();
-  console.log(user.name);
+  const { user } = useContext(GlobalContext);
+  console.log(user.username);
 
   return (
     <>
       <p><b>Logged in as: </b></p>
-      <p className='text-xm'>{user.name}</p>
+      <p className='text-xm'>{user.username}</p>
     </>
   )
 }

@@ -18,6 +18,10 @@ export default function CalendarHeader() {
     setMonthIndex(dayjs().month());
   }
 
+  function logout() {
+    fetch("http://localhost:8001/logout");
+  }
+
   return (
 
     <header className='px-2 py-2 flex items-center'>
@@ -51,7 +55,7 @@ export default function CalendarHeader() {
       </h2>
 
       {/* Move to top right corner */}
-      <button className={"text-gray-600 cursor-pointer ml-auto"} type="button" onClick={event => window.location.href = '/api/auth/logout'}> Log out </button>
+      <button className={"text-gray-600 cursor-pointer ml-auto"} type="button" onClick={logout}> Log out </button>
 
     </header>
   )

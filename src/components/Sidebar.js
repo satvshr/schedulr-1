@@ -1,16 +1,16 @@
-import { useUser } from '@auth0/nextjs-auth0/client';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CreateEventButton from './CreateEventButton';
 import Labels from './Labels';
 import UserInfo from './UserInfo';
+import GlobalContext from '../context/GlobalContext';
 
 export default function Sidebar() {
   
-  const { user } = useUser();
+  const { user } = useContext(GlobalContext);
   const [isSuperUser, setSuperUser] = useState(false);
 
   useEffect(() => {
-    if (user.name === 'ivinjoelabraham@outlook.com') {
+    if (user.authority === 'Admin') {
       setSuperUser(true);
     }
   }, [user])

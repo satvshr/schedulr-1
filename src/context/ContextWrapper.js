@@ -2,7 +2,6 @@ import GlobalContext from './GlobalContext';
 import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import Landing from '../components/Landing';
 
 export default function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
@@ -12,7 +11,7 @@ export default function ContextWrapper(props) {
   const [labels, setLabels] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const [savedEvents, setSavedEvents] = useState([]);
-
+  const [user, setUser] = useState();
   // Once the data is loaded, proceed with the rest of the code
   // const [savedEvents, dispatchCalEvent] = useReducer(
   //   savedEventsReducer,
@@ -20,7 +19,13 @@ export default function ContextWrapper(props) {
   //   initEvents
   // );
 
-
+  // async function getUserDetails() {
+  //   window.location.href = 'http://localhost:8001/login';
+  //   const val = await fetch("http://localhost:8001/login");
+  //   const data = await val.json();
+  //   console.log(data)
+  //   setUser(data)
+  // } 
 
   const filteredEvents = useMemo(() => {
     if (!isLoading) {
@@ -33,6 +38,10 @@ export default function ContextWrapper(props) {
     }
   }, [savedEvents, labels, isLoading]);
 
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   useEffect(() => {
     if (!showEventModal) {
@@ -128,7 +137,7 @@ useEffect(() => {
 
   // Return a loading indicator if the data is still loading
   if (isLoading) {
-    return <Landing />;
+    return <div>Loading...</div>;
   }
   return (
     <GlobalContext.Provider
@@ -147,6 +156,9 @@ useEffect(() => {
         labels,
         filteredEvents,
         updateLabel,
+        user,
+        setUser,
+        // getUserDetails,
       }}
     >
       {props.children}
